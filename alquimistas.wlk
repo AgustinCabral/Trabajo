@@ -14,6 +14,16 @@ object alquimista {
       itemDeCombate.esEfectivo()
     })
   }
+  method esBuenExplorador(){
+      return self.cantidadDeItemsDeRecoleccion >= 3
+  }
+method cantidadDeItemsDeRecoleccion(){
+      return itemsDeCombate.size()
+  }
+  method capacidadOfensiva(){
+      return itemsDeCombate.sum({ itemDeCombate =>
+      itemDeCombate.capacidadOfensiva()
+    })
 }
 
 object bomba {
@@ -21,6 +31,9 @@ object bomba {
   
   method esEfectivo() {
     return danio > 100
+  }
+  method capacidadOfensiva(){
+  	return danio/2
   }
 }
 
@@ -37,6 +50,15 @@ object pocion {
       material.esMistico()
     })
   }
+  method capacidadOfensiva(){
+  	return podercurativo + (self.cantidadDeMaterialesMisticos*10)
+  }
+  	method cantidadDeMaterialesMisticos(){
+      return materiales.count({material => 
+          material.esMistico()
+      })
+  }
+ 
 }
 
 object debilitador {
@@ -52,5 +74,17 @@ object debilitador {
       material.esMistico()
     })
   }
-
+  
+method capacidadOfensiva(){
+	if(self.fueCreadoPorAlgunMaterialMistico()){
+		return 12 * self.cantidadDeMaterialesMisticos()}
+		return 5
+	
+}
+method cantidadDeMaterialesMisticos(){
+      return materiales.count({material => 
+          material.esMistico()
+      })
+  }
+ 
 }
