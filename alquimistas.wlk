@@ -25,6 +25,14 @@ method cantidadDeItemsDeRecoleccion(){
       itemDeCombate.capacidadOfensiva()
     })
 }
+method esProfesional(){
+	self.promedioCalidadDeItems>50 and itemsDeCombate.all({item=>item.esEfectivo()}) and self.esBuenExplorador
+}
+
+method promedioCalidadDeItems(){
+	(itemsDeCombate.sum({item=>item.calidadDelItem}))/itemsDeCombate.length()
+}
+}
 
 object bomba {
   var danio = 15
@@ -35,7 +43,11 @@ object bomba {
   method capacidadOfensiva(){
   	return danio/2
   }
-}
+  method calidadDelItem{
+  	
+  }
+  } 
+
 
 object pocion {
   var materiales = []
